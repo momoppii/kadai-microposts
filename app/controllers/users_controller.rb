@@ -7,6 +7,8 @@ before_action :require_user_logged_in, only: [:index, :show]
 
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.order(id: :desc).page(params[:id])
+    counts(@user)
   end
 
   def new
